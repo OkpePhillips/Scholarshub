@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="search">
+    <form>
+        <input type="search" name="search" placeholder="Search scholarship" />
+        <button type="submit" >Search</button>
+      </form>
+</div>
+<div class="container">
+    <section>
+        <article>
+            {% for post in posts%}
+            <div class="write-up">
+                
+                <h3>{{ post.title }}</h3>
+                <p>Open until: {{ post.deadline }}</p>
+                <p>Financial Benefit: {{ post.benefit }}</p>
+                <p>Region: {{ post.region.name }}</p>
+            </div>
+            {% endfor %}
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+    </section>
+    <section>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+        <article>
+            <div class="image">
+                <img src="../static/images/scholarshub.png" alt="" width="100%">
+            </div>
+            <div class="write-up">
+                <h3>Full scholarship at Lagos Business School</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nam cum, quod beatae ducimus pariatur consequatur nisi earum excepturi exercitationem ab ipsa maiores saepe aut dolor sapiente eos eligendi vel?</p>
+            </div>
+        </article>
+    </section>
+</div>
+{% endblock %}

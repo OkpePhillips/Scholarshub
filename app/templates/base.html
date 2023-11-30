@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta 
+        name="description"
+        content="Get access to the most updated fully paid scholarship opportunities from top institutions in the world. You also get access to highly useful free resources.">
+        <meta name="author" content="Godwin Okpe">
+    <title>ScholarsHub</title>
+    <link rel="icon" href="../static/images/scholarshub.png" type="image/x-icon" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/register.css') }}">
+    <script src="{{url_for('static', filename='scripts/menu.js')}}"></script>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <a href="#"><img src="{{ url_for('static', filename='images/scholarshub.png')}}" alt="ScholarsHub Logo" width="70px"></a>
+            <h1>ScholarsHub</h1>
+            <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+            <nav id="navigation">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Scholarship</a></li>
+                    <li><a href="{{ url_for('services') }}">Services</a></li>
+                    <li><a href="{{ url_for('resources') }}">Resources</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    {% if current_user.is_anonymous %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                        {% if current_user.is_admin %}
+                        <li><a href="{{ url_for('post') }}">Post</a></li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    <h3>... the home of premium scholarship opportunities</h3>
+    </header>
+    <main>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content%}
+        {% endblock %}
+    </main>
+    <footer>
+        <div class="footer-wrapper">
+            <div class="footer-left">
+                <a href=""><img src="../static/images/scholarshub.png" alt="ScholarsHub logo" width="30px"></a>
+                <h3>ScholarsHub</h3>
+                <p><img src="../static/images/location.png" alt="Location icon" width="30px" height="30px">Makurdi, Benue Nigeria</p>
+                <div class="socials">
+                    <a href=""><img src="../static/images/x-twitter.png" alt="X icon" width="40px"></a>
+                    <a href=""><img src="../static/images/linkedin.png" alt="Linkedin icon" width="40px"></a>
+                    <a href=""><img src="../static/images/github.png" alt="Github icon" width="40px"></a>
+                </div>
+            </div>
+            <div class="footer-center">
+                <ul>
+                    <li><a href="{{ url_for('services') }}">Services</a></li>
+                    <li><a href="{{ url_for('resources') }}">Resources</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('privacy') }}">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h4>Be the first to know</h4>
+                <p>Enter your email below to get notified every time there is a new scholarship post</p>
+                <form action="">
+                    <input type="email" placeholder="example@mail.com">
+                    <input class="Subscribe" type="submit" value="Subscribe">
+                </form>
+            </div>
+        </div>
+        <div class="copyright"><p>&copy; philstech 2023. All rights reserved.</p></div>
+    </footer>
+</body>
+</html>

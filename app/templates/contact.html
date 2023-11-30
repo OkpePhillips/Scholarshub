@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="wrapper">
+        <h1>Contact Us</h1>
+        <p>We will love to hear your feedback.</p>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.email.label }}<br>
+                {{ form.email }}<br>
+                {% for error in form.email.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.subject.label }}<br>
+                {{ form.subject }}<br>
+                {% for error in form.subject.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.message.label }}<br>
+                {{ form.message(cols=30, rows=8) }}<br>
+                {% for error in form.message.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <div class="submit">
+                <p>{{ form.submit() }}</p>
+            </div>
+        </form>
+    </div>
+{% endblock %}

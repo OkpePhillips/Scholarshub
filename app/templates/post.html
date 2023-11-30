@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="wrapper">
+        <h1>Create a New Scholarship Post</h1>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.title.label }}<br>
+                {{ form.title }}<br>
+                {% for error in form.title.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.description.label }}<br>
+                {{ form.description(cols=30, rows=12) }}<br>
+                {% for error in form.description.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.requirement.label }}<br>
+                {{ form.requirement(cols=30, rows=12) }}<br>
+                {% for error in form.requirement.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.benefit.label }}<br>
+                {{ form.benefit }}<br>
+                {% for error in form.benefit.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.deadline.label }}<br>
+                {{ form.deadline }}<br>
+                {% for error in form.deadline.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.how_to_apply.label }}<br>
+                {{ form.how_to_apply(cols=30, rows=12) }}<br>
+                {% for error in form.how_to_apply.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.region.label }}<br>
+                {{ form.region }}<br>
+                {% for error in form.region.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <div class="submit">
+                <p>{{ form.submit() }}</p>
+            </div>
+        </form>
+    </div>
+{% endblock %}

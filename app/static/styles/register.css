@@ -1,0 +1,80 @@
+main .wrapper {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    border: gainsboro solid 1px;
+    text-align: center;
+}
+.wrapper h1 {
+    margin-bottom: 10px;
+    font: 700;
+    color: #42bff5;
+}
+.wrapper p {
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.wrapper label {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+    
+}
+.wrapper input {
+    box-sizing:border-box;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 50%;
+    height: 30px;
+    padding-left: 10px;
+    text-align: start;
+    border: #42bff5 1px solid;
+    font-size: 16px;
+}
+.wrapper textarea {
+    box-sizing:border-box;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 50%;
+    padding-left: 10px;
+    padding-top: 5px;
+    text-align: start;
+    border: #42bff5 1px solid;
+    font-size: 16px;
+}
+.wrapper select {
+    box-sizing:border-box;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    height: 30px;
+    width: 50%;
+    padding-left: 10px;
+    text-align: start;
+    border: #42bff5 1px solid;
+}
+#submit {
+    text-align: center;
+    font-size: 24px;
+    color: #42bff5;
+}
+/* .wrapper button {
+    background: #42bff5;;
+    color: #FFFFFF;
+    height: 40px;
+    border-style: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 40%;
+} */
+
+/* Responsiveness */
+@media only screen and (max-width: 768px) {
+   main .wrapper {
+        width: 100%;
+    }
+    .wrapper button {
+        width: 50%;
+    }
+}

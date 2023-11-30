@@ -1,0 +1,172 @@
+ /*HEADER */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+header {
+    background-color: #42bff5;
+    color: white;
+    padding: 30px;
+    width: 100%;
+}
+header .header-top {
+    display: flex;
+    justify-content: space-between; 
+}
+
+header h1 {
+    font-size: 40px;
+    padding-left: 40px;
+}
+
+header h3 {
+    color: grey;
+    text-align: center;
+}
+
+header .header-top nav {
+    padding-left: 20px;
+    
+}
+
+header nav ul {
+    display: flex;
+    list-style-type: none;
+    
+}
+header nav ul li {
+    padding-right: 20px;
+}
+header nav ul a {
+    text-decoration: none;
+    color: white;
+}
+header nav ul a:hover {
+    background-color: aqua;
+    color: black;
+}
+.menu-toggle {
+    display: none;
+}
+
+
+/* RESPONSIVENESS */
+@media only screen and (max-width: 768px) {
+    header .header-top {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header h1 {
+        padding-left: 0;
+        text-align: center;
+    }
+    #navigation ul {
+        flex-direction: column;
+      }
+    #navigation ul li {
+        padding-bottom: 5px;
+    }
+    #navigation.visible {
+        display: flex;
+      }
+    #navigation {
+        display: none;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 24px;
+        float: right;
+    }
+}
+
+/* FOOTER */
+footer {
+    background: #42bff5;
+    width: 100%;
+    padding: 20px 20px 20px 40px;
+}
+
+footer .footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.footer-center ul li {
+    list-style-type: none;
+}
+.footer-center a {
+    text-decoration: none;
+}
+
+.footer-center  ul li a{
+    color: black;
+}
+.footer-center ul li a:hover {
+    background-color: aqua;
+    color: white;
+}
+.footer-center ul li {
+    margin-bottom: 20px;
+}
+.footer-right {
+    width: 30%;
+}
+.footer-right h4 {
+    margin-bottom: 10px;
+}
+.footer-right p {
+    margin-bottom: 10px;
+}
+.footer-right input {
+    margin-bottom: 10px;
+}
+.footer-right input {
+    border-radius: 5px;
+    height: 25px;
+    border:#FFFFFF solid 1px;
+}
+.Subscribe {
+    text-align: center;
+    width: 80px;
+    color: white;
+    background-color: grey;
+}
+.footer-left h3{
+    margin-bottom: 20px;
+    color: white;
+}
+.footer-left p {
+    margin-bottom: 20px;
+}
+
+.socials img{
+    margin-right: 10px;
+}
+.copyright {
+    float: right;
+}
+
+/* RESPONSIVENESS */
+
+@media only screen and (max-width: 768px) {
+    footer .footer-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    footer .footer-right,
+    footer .footer-left,
+    footer .footer-center {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
