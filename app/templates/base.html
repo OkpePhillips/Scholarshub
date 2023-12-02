@@ -24,7 +24,7 @@
                 <ul>
                     <li><a href="{{ url_for('home') }}">Scholarship</a></li>
                     <li><a href="{{ url_for('services') }}">Services</a></li>
-                    <li><a href="{{ url_for('resources') }}">Resources</a></li>
+                    <li><a href="{{ url_for('resource_upload') }}">Resources</a></li>
                     <li><a href="{{ url_for('about') }}">About</a></li>
                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
                     {% if current_user.is_anonymous %}
@@ -70,7 +70,7 @@
             <div class="footer-center">
                 <ul>
                     <li><a href="{{ url_for('services') }}">Services</a></li>
-                    <li><a href="{{ url_for('resources') }}">Resources</a></li>
+                    <li><a href="{{ url_for('resource_upload') }}">Resources</a></li>
                     <li><a href="{{ url_for('about') }}">About Us</a></li>
                     <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
                     <li><a href="{{ url_for('privacy') }}">Privacy Policy</a></li>

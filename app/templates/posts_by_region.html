@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="main-content">
+    <div class="article-container">
+        {% if posts %}
+            {% for post in posts %}
+                <article>
+                    <div class="image">
+                        <img src="../static/images/scholarshub.png" alt="" width="60px" height="60px">
+                    </div>
+                    <div class="write-up">
+                        <h3><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></h3>
+                        <p>Deadline: {{ post.deadline }}</p>
+                        <p>Financial Benefit: {{ post.benefit }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        {%else %}
+            <article>
+                <div class="write-up" margin="0 auto">
+                    <h2>No Scholarships found for this region</h2>
+                </div>
+            </article>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

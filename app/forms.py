@@ -7,7 +7,6 @@ from app.models import User
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
 class RegistrationForm(FlaskForm):
@@ -57,5 +56,15 @@ class SOPReviewForm(FlaskForm):
     name = StringField('Service Name', validators=[DataRequired()])
     sop = FileField('CV File', validators=[FileRequired()])
     submit = SubmitField('Submit SOP')
+
+class ResourcesForm(FlaskForm):
+    name = StringField('Resource Name', validators=[DataRequired()])
+    description = StringField('Description', validators=[DataRequired()])
+    resource = FileField('Resource', validators=[FileRequired()])
+    submit = SubmitField('Upload Resource')
+
+class SearchForm(FlaskForm):
+    search_query = StringField('Search', render_kw={"placeholder": "Search Scholarship"})
+    submit = SubmitField('Search')
 
 

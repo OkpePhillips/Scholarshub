@@ -1,17 +1,35 @@
 from flask import render_template, flash, redirect, url_for, request, send_from_directory
 from app import app
 from werkzeug.utils import secure_filename
-from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm
-from flask_login import logout_user, login_required, login_user
-from app.models import User, Region, Post, Service, cv_uploads, sop_uploads
+from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm, SearchForm, ResourcesForm
+from flask_login import logout_user, login_required, login_user, current_user
+from app.models import User, Region, Post, Service, Resources, cv_uploads, sop_uploads, resource_uploads
+from sqlalchemy import or_
 from app import db
 
 
-@app.route('/')
-@app.route('/home')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def home():
-    posts = Post.query.all()
-    return render_template('home.html', posts=posts)
+    form = SearchForm()
+    regions = Region.query.all()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            search_query = form.search_query.data
+            posts = Post.query.filter(
+            or_(
+                    Post.title.ilike(f"%{search_query}%"),
+                    Post.description.ilike(f"%{search_query}%"),
+                    Post.region.has(Region.name.ilike(f"%{search_query}%")),
+                    Post.benefit.ilike(f"%{search_query}%"),
+                    Post.requirement.ilike(f"%{search_query}%"),
+                    Post.deadline.ilike(f"%{search_query}%"),
+                )
+            ).all()
+            return render_template('home.html', posts=posts, form=form, regions=regions)
+    else:
+        posts = Post.query.all()
+        return render_template('home.html', posts=posts, form=form, regions=regions)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -21,7 +39,7 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
+        login_user(user)
         next_page = request.args.get('next')
         if not next_page:
             next_page = url_for('home')
@@ -56,11 +74,6 @@ def user(username):
 @app.route('/services', methods=['GET', 'POST'])
 def services():
     return render_template('services.html')
-
-@app.route('/resources')
-@login_required
-def resources():
-    return render_template('resources.html')
 
 @app.route('/about')
 def about():
@@ -114,7 +127,7 @@ def cv_review():
     form = CVReviewForm()
     if form.validate_on_submit():
         cv_filename = secure_filename(form.cv.data.filename)
-        cv_path = cv.uploads.save(form.cv.data)
+        cv_path = cv_uploads.save(form.cv.data)
         service = Service(
             user_id=current_user.id,
             cv=cv_filename,
@@ -130,19 +143,47 @@ def cv_review():
 @login_required
 def sop_review():
     form = SOPReviewForm()
-    print('gotten')
     if form.validate_on_submit():
         sop_filename = secure_filename(form.sop.data.filename)
-        sop_path = sop.uploads.save(form.sop.data)
+        sop_path = sop_uploads.save(form.sop.data)
         service = Service(
             user_id=current_user.id,
             sop=sop_filename,
             name=form.name.data
         )
-        print('got here')
         db.session.add(service)
         db.session.commit()
         flash('Service request submitted successfully!')
         return redirect(url_for('home'))
     return render_template('sop_review.html', form=form)
 
+@app.route('/resources', methods=['GET', 'POST'])
+@login_required
+def resource_upload():
+    form = ResourcesForm()
+    if form.validate_on_submit():
+        resource_filename = secure_filename(form.resource.data.filename)
+        file_path = resource_uploads.save(form.resource.data)
+        resource = Resources(
+            user_id=current_user.id,
+            resource=resource_filename,
+            name=form.name.data,
+            description=form.description.data
+        )
+        db.session.add(resource)
+        db.session.commit()
+        flash('Resource uploaded successfully!')
+        return redirect(url_for('home'))
+    return render_template('resource_upload.html', form=form)
+
+@app.route('/post/<int:post_id>')
+def post_detail(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post_detail.html', post=post)
+
+@app.route('/posts/<region_name>')
+def posts_by_region(region_name):
+    region = Region.query.filter_by(name=region_name).first()
+    if region:
+        posts = Post.query.filter_by(region_id=region.id).all()
+        return render_template('posts_by_region.html', posts=posts)

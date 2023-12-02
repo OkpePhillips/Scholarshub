@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="wrapper">
+        <h1>Search</h1>
+        <form method="post" action="{{ url_for('search') }}">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.search_query.label }}<br>
+                {{ form.search_query }}<br>
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+{% endblock %}

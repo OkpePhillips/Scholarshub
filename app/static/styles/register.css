@@ -10,16 +10,19 @@ main .wrapper {
     font: 700;
     color: #42bff5;
 }
+.wrapper h2 {
+    margin-bottom: 10px;
+    font: 400;
+    color: #42bff5;
+}
 .wrapper p {
     margin-bottom: 10px;
-    text-align: justify;
 }
 
 .wrapper label {
     display: inline-block;
     width: 100%;
     margin-bottom: 10px;
-    
 }
 .wrapper input {
     box-sizing:border-box;
@@ -31,6 +34,9 @@ main .wrapper {
     text-align: start;
     border: #42bff5 1px solid;
     font-size: 16px;
+}
+.privacy p {
+    text-align: justify;
 }
 .wrapper textarea {
     box-sizing:border-box;
@@ -53,28 +59,22 @@ main .wrapper {
     text-align: start;
     border: #42bff5 1px solid;
 }
+
 #submit {
     text-align: center;
     font-size: 24px;
     color: #42bff5;
 }
-/* .wrapper button {
-    background: #42bff5;;
-    color: #FFFFFF;
-    height: 40px;
-    border-style: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    width: 40%;
-} */
 
 /* Responsiveness */
 @media only screen and (max-width: 768px) {
    main .wrapper {
+        width: 80%;
+    }
+    .wrapper input {
         width: 100%;
     }
-    .wrapper button {
-        width: 50%;
+    .wrapper textarea {
+        width: 80%;
     }
 }

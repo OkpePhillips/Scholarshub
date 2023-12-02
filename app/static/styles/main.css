@@ -6,6 +6,8 @@ main {
 }
 main .container {
     display: flex;
+    border: gainsboro solid 1px;
+    width: 90%;
 }
 main .search {
     align-items: center;
@@ -30,29 +32,43 @@ main .search button {
     margin-bottom: 10px;
     width: 20%;
 }
-section {
-    width: 50%;
-    padding: 10px;
-}
 article {
     margin-bottom: 10px;
-    display: flex;
-    height: 300px;
-    border: #CCCCCC solid 1px;
     padding: 10px;
-}
-.write-up {
-    width: 50%;
+    width: 100%;
 }
 .write-up h3 {
     margin-bottom: 10px;
 }
 .write-up p {
     text-align: justify;
+    margin-bottom: 5px;
 }
-.image {
-    width: 50%;
+
+
+.sidebar {
+    flex-grow: 4;
+    padding: 10px;
+    border-right: 1px solid #CCCCCC;
 }
+
+.sidebar h3 {
+    color: #42bff5;
+    margin-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+.main-content {
+    width: 70%;
+}
+
 /* RESPONSIVENESS */
 @media only screen and (max-width: 768px) {
     main .search {
@@ -69,6 +85,9 @@ article {
     }
     main .container {
         flex-direction: column;
+    }
+    .main-content {
+        width: 100%;
     }
 }
 
@@ -113,5 +132,8 @@ main .services {
     }
     .services button {
         width: 80%;
+    }
+    .sidebar {
+        display: none;
     }
 }

@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="wrapper">
-        <h1>Request CV Review</h1>
+        <h1>Upload Resource</h1>
         <form method="post" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <p>
@@ -13,9 +13,16 @@
                 {% endfor %}
             </p>
             <p>
-                {{ form.cv.label }}<br>
-                {{ form.cv }} <br>
-                {% for error in form.cv.errors %}
+                {{ form.description.label }}<br>
+                {{ form.description }} <br>
+                {% for error in form.description.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.resource.label }}<br>
+                {{ form.resource }} <br>
+                {% for error in form.resource.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
