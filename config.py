@@ -10,3 +10,8 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOADS_DEFAULT_DEST = 'C:/Users/APINPC/Desktop/scholarshub/uploads'
     UPLOADS_DEFAULT_URL = 'http://localhost:5000/uploads/'
+    MAIL_SERVER = 'smpt.gmail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = 'okpegodwinfather@gmail.com'
+    MAIL_PASSWORD = 'gusi rpln eecd gbvb'

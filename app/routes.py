@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for, request, send_from_directory, send_file
-from app import app
+from app import app, mail
 from werkzeug.utils import secure_filename
 from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm, SearchForm, ResourcesForm, EditPostForm, EditProfileForm
 from flask_login import logout_user, login_required, login_user, current_user
@@ -7,6 +7,7 @@ from app.models import User, Region, Post, Service, Resources, cv_uploads, sop_u
 from sqlalchemy import or_
 from app import db
 import os
+from flask_mail import Message
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -89,6 +90,13 @@ def privacy():
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
+        msg = Message('New Contact Form Submission',
+                      sender=form.email.data,
+                      recipients=['okpegodwin18@yahoo.com.com'])
+        msg.body = f"Name: {form.email.data}\nSubject: {form.email.data}\nMessage:\n{form.message.data}"
+        mail.send(msg)
+
+        flash('Your message has been sent. Thank you!', 'success')
         return redirect(url_for('home'))
     return render_template('contact.html', form=form)
 
