@@ -2,17 +2,22 @@
 
 {% block content %}
     <div class="wrapper">
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.description }}</p>
-        <h2>Requirements</h2>
-        <p>{{ post.requirement }}</p>
-        <h2>Benefits</h2>
-        <p>{{ post.benefit }}</p>
-        <h2>Deadline</h2>
-        <p>{{ post.deadline }}</p>
-        <h2>How To Apply</h2>
-        <p>{{ post.how_to_apply }}</p>
-        <h2>Region</h2>
-        <p>{{ post.region.name }}</p>
+        <div class="privacy">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.description }}</p>
+            <h2>Requirements</h2>
+            <p>{{ post.requirement }}</p>
+            <h2>Benefits</h2>
+            <p>{{ post.benefit }}</p>
+            <h2>Deadline</h2>
+            <p>{{ post.deadline }}</p>
+            <h2>How To Apply</h2>
+            <p>{{ post.how_to_apply }}</p>
+            <h2>Region</h2>
+            <p>{{ post.region.name }}</p>
+            <div>
+                <a href="{{ post.link}}" target="_blank"><button class="apply-button">Apply</button></a>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="wrapper">
+    <div class="article-container">
+        <h1>All Registered Users</h1>
+        {% if users %}
+            {% for user in users %}
+                <article>
+                    <div class="write-up">
+                        <p>User_id: {{ user.id }}</p>
+                        <p>Username: {{ user.username }}</p>
+                        <p>Email: {{ user.email }}</p>
+                        <p>Role: {{ user.role }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        {%else %}
+            <article>
+                <div class="write-up" margin="0 auto">
+                    <h2>No User Found</h2>
+                </div>
+            </article>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}  

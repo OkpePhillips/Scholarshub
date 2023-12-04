@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="sidebar">
+        <h3>Admin Roles</h3>
+        <ul>
+            <li><a href="{{ url_for('post') }}">Create Scholarship Post</a></li>
+            <li><a href="{{ url_for('resource_upload') }}">Upload Resources</a></li>
+            <li><a href="{{ url_for('all_services') }}">All Services</a></li>
+            <li><a href="{{ url_for('all_users') }}">All users</a></li>
+            <li><a href="{{ url_for('region') }}">Create Regions</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h1>Admin Dashboard</h1>
+    </div>
+</div>
+{% endblock %}  

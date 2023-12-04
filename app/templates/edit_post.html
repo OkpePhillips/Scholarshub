@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="wrapper">
-        <h1>Create a New Scholarship Post</h1>
+        <h1>Edit Scholarship Post</h1>
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <p>
@@ -44,20 +44,6 @@
                 {{ form.how_to_apply.label }}<br>
                 {{ form.how_to_apply(cols=30, rows=12) }}<br>
                 {% for error in form.how_to_apply.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.link.label }}<br>
-                {{ form.link }}<br>
-                {% for error in form.link.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.region.label }}<br>
-                {{ form.region }}<br>
-                {% for error in form.region.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>

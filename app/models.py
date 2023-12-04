@@ -44,10 +44,11 @@ class Post(db.Model):
     modified_at = db.Column(db.DateTime, index=True, server_default=func.now(), onupdate=func.now())
     title = db.Column(db.String(128), nullable=False)
     description = db.Column(db.String(1024), nullable=False)
-    deadline = db.Column(String(64), nullable=False)
-    benefit = db.Column(String(500), nullable=False)
-    requirement = db.Column(String(500), nullable=False)
-    how_to_apply = db.Column(String(500), nullable=False)
+    deadline = db.Column(db.String(64), nullable=False)
+    benefit = db.Column(db.String(500), nullable=False)
+    requirement = db.Column(db.String(500), nullable=False)
+    how_to_apply = db.Column(db.String(500), nullable=False)
+    link = db.Column(db.String(120))
     region_id = db.Column(db.Integer, db.ForeignKey('region.id', name='fk_post_region'))
 
     def __repr__(self):

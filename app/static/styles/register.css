@@ -66,6 +66,16 @@ main .wrapper {
     color: #42bff5;
 }
 
+.apply-button {
+    box-sizing:border-box;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    border: #42bff5 1px solid;
+    font-size: 16px;
+}
 /* Responsiveness */
 @media only screen and (max-width: 768px) {
    main .wrapper {

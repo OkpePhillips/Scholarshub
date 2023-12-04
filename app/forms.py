@@ -40,6 +40,7 @@ class PostForm(FlaskForm):
     benefit = StringField('Financial Benefit', validators=[DataRequired()])
     deadline = StringField('Deadline', validators=[DataRequired()])
     how_to_apply = TextAreaField("How To Apply", validators=[DataRequired()])
+    link = StringField("Link", validators=[DataRequired()])
     region = SelectField('Region', coerce=int, validators=[DataRequired()])
     submit = SubmitField('Create Post')
 
@@ -67,4 +68,20 @@ class SearchForm(FlaskForm):
     search_query = StringField('Search', render_kw={"placeholder": "Search Scholarship"})
     submit = SubmitField('Search')
 
+class EditProfileForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField(
+        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Edit Profile')
+
+class EditPostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    requirement = TextAreaField('Requirement', validators=[DataRequired()])
+    benefit = StringField('Financial Benefit', validators=[DataRequired()])
+    deadline = StringField('Deadline', validators=[DataRequired()])
+    how_to_apply = TextAreaField("How To Apply", validators=[DataRequired()])
+    link = StringField("Link", validators=[DataRequired()])
+    submit = SubmitField('Edit Post')
 

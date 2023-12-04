@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="wrapper">
+    <h1>All Services Requested</h1>
+    {% if services %}
+        {% for service in services %}
+            <article>
+                <div class="write-up">
+                    <p>Id: {{ service.id }}</p>
+                    <p>Service Name: {{ service.name }}</p>
+                    <p>Status: {{ service.status }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    {%else %}
+        <article>
+            <div class="write-up" margin="0 auto">
+                <h2>No Servicees Found</h2>
+            </div>
+        </article>
+    {% endif %}
+</div>
+{% endblock %}  

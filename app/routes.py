@@ -1,11 +1,12 @@
-from flask import render_template, flash, redirect, url_for, request, send_from_directory
+from flask import render_template, flash, redirect, url_for, request, send_from_directory, send_file
 from app import app
 from werkzeug.utils import secure_filename
-from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm, SearchForm, ResourcesForm
+from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm, SearchForm, ResourcesForm, EditPostForm, EditProfileForm
 from flask_login import logout_user, login_required, login_user, current_user
 from app.models import User, Region, Post, Service, Resources, cv_uploads, sop_uploads, resource_uploads
 from sqlalchemy import or_
 from app import db
+import os
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -69,7 +70,8 @@ def register():
 @login_required 
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=user)
+    services = Service.query.filter_by(user_id=user.id).all()
+    return render_template('user.html', user=user, services=services)
 
 @app.route('/services', methods=['GET', 'POST'])
 def services():
@@ -114,6 +116,7 @@ def post():
             benefit=form.benefit.data,
             deadline=form.deadline.data,
             how_to_apply=form.how_to_apply.data,
+            link=form.link.data,
             region_id=form.region.data
         )
         db.session.add(post)
@@ -157,7 +160,7 @@ def sop_review():
         return redirect(url_for('home'))
     return render_template('sop_review.html', form=form)
 
-@app.route('/resources', methods=['GET', 'POST'])
+@app.route('/resource_upload', methods=['GET', 'POST'])
 @login_required
 def resource_upload():
     form = ResourcesForm()
@@ -166,7 +169,7 @@ def resource_upload():
         file_path = resource_uploads.save(form.resource.data)
         resource = Resources(
             user_id=current_user.id,
-            resource=resource_filename,
+            resource=file_path,
             name=form.name.data,
             description=form.description.data
         )
@@ -187,3 +190,104 @@ def posts_by_region(region_name):
     if region:
         posts = Post.query.filter_by(region_id=region.id).all()
         return render_template('posts_by_region.html', posts=posts)
+
+@app.route('/resources')
+@login_required
+def resources():
+    resources = Resources.query.all()
+    return render_template('resources.html', resources=resources)
+
+@app.route('/download_resource/<int:resource_id>')
+@login_required
+def download_resource(resource_id):
+    resource = Resources.query.get_or_404(resource_id)
+    base_directory = 'C:\\Users\\APINPC\\Desktop\\scholarshub\\uploads'
+    file_path = os.path.join(base_directory, 'resource', resource.resource)
+    return send_file(file_path, as_attachment=True)
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.email = form.email.data
+        current_user.set_password(form.password.data)
+        db.session.commit()
+        
+        flash('Your profile has been updated!', 'success')
+        return redirect(url_for('user'))
+    elif request.method == 'GET':
+        form.email.data = current_user.email
+    return render_template('edit_profile.html', form=form)
+
+@app.route('/admin/dashboard')
+@login_required
+def admin_dashboard():
+    return render_template('admin_dashboard.html')
+
+@app.route('/admin/view_users')
+@login_required
+def view_users():
+    users = User.query.all()
+    return render_template('admin_users.html', users=users)
+
+@app.route('/admin/delete_user/<int:user_id>')
+@login_required
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    flash('User deleted successfully!', 'success')
+    return redirect(url_for('view_users'))
+
+@app.route('/admin/view_services')
+@login_required
+def all_services():
+    services = Service.query.all()
+    return render_template('admin_services.html', services=services)
+
+@app.route('/admin/view_users')
+@login_required
+def all_users():
+    users = User.query.all()
+    return render_template('admin_users.html', users=users)
+
+@app.route('/admin/delete_posts/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    form = EditPostForm()
+    if request.method == 'POST':
+        db.session.delete(post)
+        db.session.commit()
+        flash('Post deleted successfully!')
+        return redirect(url_for('home'))
+    return render_template('delete_post.html', post=post, form=form)
+
+@app.route('/admin/posts/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def edit_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    form = EditPostForm()
+
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.description = form.description.data
+        post.requirement = form.requirement.data
+        post.benefit = form.benefit.data
+        post.deadline = form.deadline.data
+        post.how_to_apply = form.how_to_apply.data
+        post.link = form.link.data
+        db.session.commit()
+
+        flash('Your profile has been updated!', 'success')
+        return redirect(url_for('home'))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.description.data = post.description
+        form.requirement.data = post.requirement
+        form.benefit.data = post.benefit
+        form.deadline.data = post.deadline
+        form.how_to_apply.data = post.how_to_apply
+        form.link.data = post.link
+    return render_template('edit_post.html', form=form)
