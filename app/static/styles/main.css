@@ -23,7 +23,7 @@ main .search input {
 }
 main .search button {
     font-size: 14px;
-    background: #42bff5;;
+    background: #42bff5;
     color: #FFFFFF;
     height: 28px;
     width: 30%;
@@ -73,7 +73,16 @@ article {
 .main-content {
     width: 70%;
 }
-
+.main-content h1 {
+    color: #42bff5;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.main-content p {
+    color: #42bff5;
+    margin-bottom: 5px;
+    padding: 5px;
+}
 /* RESPONSIVENESS */
 @media only screen and (max-width: 768px) {
     main .search {

@@ -3,7 +3,7 @@ from app import app, mail
 from werkzeug.utils import secure_filename
 from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm, SearchForm, ResourcesForm, EditPostForm, EditProfileForm
 from flask_login import logout_user, login_required, login_user, current_user
-from app.models import User, Region, Post, Service, Resources, cv_uploads, sop_uploads, resource_uploads
+from app.models import User, Region, Post, Service, Resources, cv_uploads, sop_uploads, resource_uploads, reviewed_uploads
 from sqlalchemy import or_
 from app import db
 import os
@@ -232,7 +232,23 @@ def edit_profile():
 @app.route('/admin/dashboard')
 @login_required
 def admin_dashboard():
-    return render_template('admin_dashboard.html')
+    users = User.query.all()
+    posts = Post.query.all()
+    services = Service.query.all()
+    posts_count = 0
+    users_count = 0
+    services_count = 0
+
+    for user in users:
+        users_count += 1
+
+    for post in posts:
+        posts_count += 1
+
+    for service in services:
+        services_count += 1
+    
+    return render_template('admin_dashboard.html', users_count=users_count, posts_count=posts_count, services_count=services_count)
 
 @app.route('/admin/view_users')
 @login_required
@@ -300,3 +316,34 @@ def edit_post(post_id):
         form.how_to_apply.data = post.how_to_apply
         form.link.data = post.link
     return render_template('edit_post.html', form=form)
+
+
+@app.route('/admin/upload_reviewed/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def upload_reviewed_cv(user_id):
+    if not current_user.is_admin:
+        abort(403) 
+
+    user = User.query.get_or_404(user_id)
+    form = EditProfileForm()
+
+    if form.validate_on_submit():
+        filename = secure_filename(form.reviewed.data.filename)
+        file_path = reviewed_uploads.save(form.reviewed.data)
+        user.reviewed = file_path
+        db.session.commit()
+
+        flash('Reviewed CV uploaded successfully!')
+        return redirect(url_for('user', user=user))
+
+    return render_template('upload_reviewed_cv.html', form=form, user=user)
+
+@app.route('/download_reviewed/<int:user_id>')
+@login_required
+def download_reviewed_cv(user_id):
+    user = User.query.get_or_404(user_id)
+    if not user.reviewed:
+        abort(404)
+    base_directory = 'C:\\Users\\APINPC\\Desktop\\scholarshub\\uploads'
+    file_path = os.path.join(base_directory, 'reviewed', user.reviewed)
+    return send_file(file_path, as_attachment=True)

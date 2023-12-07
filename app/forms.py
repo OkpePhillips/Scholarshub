@@ -73,6 +73,7 @@ class EditProfileForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    reviewed = FileField('Reviewed')
     submit = SubmitField('Edit Profile')
 
 class EditPostForm(FlaskForm):

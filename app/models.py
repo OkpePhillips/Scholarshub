@@ -11,7 +11,8 @@ from app import app
 cv_uploads = UploadSet('cv', extensions=('pdf', 'doc', 'docx'))
 sop_uploads = UploadSet('sop', extensions=('pdf', 'doc', 'docx'))
 resource_uploads = UploadSet('resource', extensions=('pdf', 'doc', 'docx'))
-configure_uploads(app, (cv_uploads, sop_uploads, resource_uploads))
+reviewed_uploads = UploadSet('reviewed', extensions=('pdf', 'doc', 'docx'))
+configure_uploads(app, (cv_uploads, sop_uploads, resource_uploads, reviewed_uploads))
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,6 +24,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     role = db.Column(db.String(20), nullable=False, default='user')
+    reviewed = db.Column(db.String(255))
     services = db.relationship('Service', backref='user', lazy='dynamic')
     resources = db.relationship('Resources', backref='user', lazy='dynamic')
 

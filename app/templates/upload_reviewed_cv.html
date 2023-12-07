@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="wrapper">
+        <h1>Upload Reviewed CV/SOP</h1>
+        <form method="post" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.reviewed.label }}<br>
+                {{ form.reviewed }} <br>
+                {% for error in form.reviewed.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+{% endblock %}
