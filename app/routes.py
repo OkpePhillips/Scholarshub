@@ -90,8 +90,9 @@ def privacy():
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
-        msg = Message('New Contact Form Submission',
-                      sender=form.email.data,
+        email_sender = form.email.data
+        msg = Message(form.subject.data,
+                      sender='okpegodwinfather@gmail.com',
                       recipients=['okpegodwin18@yahoo.com.com'])
         msg.body = f"Name: {form.email.data}\nSubject: {form.email.data}\nMessage:\n{form.message.data}"
         mail.send(msg)
