@@ -24,7 +24,6 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     role = db.Column(db.String(20), nullable=False, default='user')
-    reviewed = db.Column(db.String(255))
     services = db.relationship('Service', backref='user', lazy='dynamic')
     resources = db.relationship('Resources', backref='user', lazy='dynamic')
 
@@ -64,6 +63,7 @@ class Service(db.Model):
     status = db.Column(db.String(128), default='Pending')
     cv = db.Column(db.String(300))
     sop = db.Column(db.String(300))
+    reviewed_file = db.Column(db.String(300))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):

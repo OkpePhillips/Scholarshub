@@ -1,7 +1,7 @@
-from flask import render_template, flash, redirect, url_for, request, send_from_directory, send_file
+from flask import render_template, flash, redirect, url_for, request, send_from_directory, send_file, abort
 from app import app, mail
 from werkzeug.utils import secure_filename
-from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm, SearchForm, ResourcesForm, EditPostForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm, SearchForm, ResourcesForm, EditPostForm, EditProfileForm, ReviewedForm
 from flask_login import logout_user, login_required, login_user, current_user
 from app.models import User, Region, Post, Service, Resources, cv_uploads, sop_uploads, resource_uploads, reviewed_uploads
 from sqlalchemy import or_
@@ -318,32 +318,36 @@ def edit_post(post_id):
     return render_template('edit_post.html', form=form)
 
 
-@app.route('/admin/upload_reviewed/<int:user_id>', methods=['GET', 'POST'])
+@app.route('/admin/upload_reviewed/<int:user_id>/<int:service_id>', methods=['GET', 'POST'])
 @login_required
-def upload_reviewed_cv(user_id):
-    if not current_user.is_admin:
+def upload_reviewed_cv(user_id, service_id):
+    if not current_user.is_admin():
         abort(403) 
-
     user = User.query.get_or_404(user_id)
-    form = EditProfileForm()
+    service = Service.query.get_or_404(service_id)
+    username = user.username
+    form = ReviewedForm()
 
     if form.validate_on_submit():
-        filename = secure_filename(form.reviewed.data.filename)
         file_path = reviewed_uploads.save(form.reviewed.data)
-        user.reviewed = file_path
+        service.reviewed_file = file_path
+        service.status = "Completed"
         db.session.commit()
 
         flash('Reviewed CV uploaded successfully!')
-        return redirect(url_for('user', user=user))
+        return redirect(url_for('user', username=username))
 
     return render_template('upload_reviewed_cv.html', form=form, user=user)
 
-@app.route('/download_reviewed/<int:user_id>')
+@app.route('/download_reviewed/<int:user_id>/<int:service_id>')
 @login_required
-def download_reviewed_cv(user_id):
+def download_reviewed(user_id, service_id):
     user = User.query.get_or_404(user_id)
-    if not user.reviewed:
+    service = Service.query.filter_by(user_id=user_id, id=service_id).first()
+
+    if not service or not service.reviewed_file:
         abort(404)
+
     base_directory = 'C:\\Users\\APINPC\\Desktop\\scholarshub\\uploads'
-    file_path = os.path.join(base_directory, 'reviewed', user.reviewed)
+    file_path = os.path.join(base_directory, 'reviewed', service.reviewed_file)
     return send_file(file_path, as_attachment=True)

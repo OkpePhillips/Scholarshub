@@ -73,7 +73,6 @@ class EditProfileForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    reviewed = FileField('Reviewed')
     submit = SubmitField('Edit Profile')
 
 class EditPostForm(FlaskForm):
@@ -85,4 +84,8 @@ class EditPostForm(FlaskForm):
     how_to_apply = TextAreaField("How To Apply", validators=[DataRequired()])
     link = StringField("Link", validators=[DataRequired()])
     submit = SubmitField('Edit Post')
+
+class ReviewedForm(FlaskForm):
+    reviewed = FileField('Reviewed', validators=[FileRequired()])
+    submit = SubmitField('Upload Reviewed')
 
