@@ -89,3 +89,6 @@ class ReviewedForm(FlaskForm):
     reviewed = FileField('Reviewed', validators=[FileRequired()])
     submit = SubmitField('Upload Reviewed')
 
+class SubscriptionForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Subscribe')

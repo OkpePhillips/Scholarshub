@@ -58,7 +58,10 @@ header nav ul a:hover {
 .flash {
     background-color: forestgreen;
     padding: 10px;
-    width: 400px;
+    width: 60%;
+}
+.flask ul {
+    list-style-type: none;
 }
 /* RESPONSIVENESS */
 @media only screen and (max-width: 768px) {

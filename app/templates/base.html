@@ -64,9 +64,9 @@
                 <h3>ScholarsHub</h3>
                 <p><img src="../static/images/location.png" alt="Location icon" width="30px" height="30px">Makurdi, Benue Nigeria</p>
                 <div class="socials">
-                    <a href=""><img src="../static/images/x-twitter.png" alt="X icon" width="40px"></a>
-                    <a href=""><img src="../static/images/linkedin.png" alt="Linkedin icon" width="40px"></a>
-                    <a href=""><img src="../static/images/github.png" alt="Github icon" width="40px"></a>
+                    <a href="https://twitter.com/OkpePhillips"><img src="../static/images/x-twitter.png" alt="X icon" width="40px"></a>
+                    <a href="https://www.linkedin.com/in/godwinokpe"><img src="../static/images/linkedin.png" alt="Linkedin icon" width="40px"></a>
+                    <a href="https://github.com/OkpePhillips"><img src="../static/images/github.png" alt="Github icon" width="40px"></a>
                 </div>
             </div>
             <div class="footer-center">
@@ -81,7 +81,8 @@
             <div class="footer-right">
                 <h4>Be the first to know</h4>
                 <p>Enter your email below to get notified every time there is a new scholarship post</p>
-                <form action="">
+                <form method="post", action="{{ url_for('subscribe') }}">
+                    {{ subscription_form.hidden_tag() }}
                     <input type="email" placeholder="example@mail.com">
                     <input class="Subscribe" type="submit" value="Subscribe">
                 </form>

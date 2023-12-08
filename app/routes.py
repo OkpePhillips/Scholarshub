@@ -93,12 +93,15 @@ def contact():
         email_sender = form.email.data
         msg = Message(form.subject.data,
                       sender='okpegodwinfather@gmail.com',
-                      recipients=['okpegodwin18@yahoo.com.com'])
+                      recipients=['okpegodwin18@yahoo.com'])
         msg.body = f"Name: {form.email.data}\nSubject: {form.email.data}\nMessage:\n{form.message.data}"
-        mail.send(msg)
-
-        flash('Your message has been sent. Thank you!', 'success')
-        return redirect(url_for('home'))
+        
+        try:
+            mail.send(msg)
+            flash('Your message has been sent. Thank you!')
+            return redirect(url_for('home'))
+        except Exception as e:
+            flash(f'Error: {e}', 'error')
     return render_template('contact.html', form=form)
 
 @app.route('/region', methods=['GET', 'POST'])
@@ -351,3 +354,25 @@ def download_reviewed(user_id, service_id):
     base_directory = 'C:\\Users\\APINPC\\Desktop\\scholarshub\\uploads'
     file_path = os.path.join(base_directory, 'reviewed', service.reviewed_file)
     return send_file(file_path, as_attachment=True)
+
+@app.route('/subscribe', methods=['GET', 'POST'])
+def subscribe():
+    form = SubscriptionForm()
+
+    if form.validate_on_submit():
+        email = form.email.data
+    
+        if Subscription.query.filter_by(email=email).first():
+            flash('You are already subscribed!', 'info')
+        else:
+            new_subscription = Subscription(email=email)
+            db.session.add(new_subscription)
+            db.session.commit()
+
+            send_confirmation_email(email)
+
+            flash('Subscription successful! Check your email for confirmation.', 'success')
+
+        return redirect(url_for('home'))
+
+    return render_template('home.html', form=form)

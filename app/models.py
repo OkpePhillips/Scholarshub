@@ -91,6 +91,10 @@ class Resources(db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.name)
 
+class Subscription(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
