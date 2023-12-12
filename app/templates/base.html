@@ -81,10 +81,10 @@
             <div class="footer-right">
                 <h4>Be the first to know</h4>
                 <p>Enter your email below to get notified every time there is a new scholarship post</p>
-                <form method="post", action="{{ url_for('subscribe') }}">
+                <form method="post" action="{{ url_for('subscribe') }}">
                     {{ subscription_form.hidden_tag() }}
-                    <input type="email" placeholder="example@mail.com">
-                    <input class="Subscribe" type="submit" value="Subscribe">
+                    {{ subscription_form.email }}
+                    {{ subscription_form.submit }}
                 </form>
             </div>
         </div>
@@ -92,3 +92,7 @@
     </footer>
 </body>
 </html>
+
+
+<!-- <input type="email" placeholder="example@mail.com">
+                    <input class="Subscribe" type="submit" value="Subscribe"> -->

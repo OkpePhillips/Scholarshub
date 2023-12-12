@@ -59,10 +59,15 @@ header nav ul a:hover {
     background-color: forestgreen;
     padding: 10px;
     width: 60%;
-}
-.flask ul {
     list-style-type: none;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    text-align: center;
 }
+.flash ul {
+    list-style: none;
+}
+
 /* RESPONSIVENESS */
 @media only screen and (max-width: 768px) {
     header .header-top {

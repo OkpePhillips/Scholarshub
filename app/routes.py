@@ -1,19 +1,19 @@
 from flask import render_template, flash, redirect, url_for, request, send_from_directory, send_file, abort
 from app import app, mail
 from werkzeug.utils import secure_filename
-from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm, SearchForm, ResourcesForm, EditPostForm, EditProfileForm, ReviewedForm
+from app.forms import LoginForm, RegistrationForm,ContactForm, PostForm, RegionForm, CVReviewForm, SOPReviewForm, SearchForm, ResourcesForm, EditPostForm, EditProfileForm, ReviewedForm, SubscriptionForm
 from flask_login import logout_user, login_required, login_user, current_user
-from app.models import User, Region, Post, Service, Resources, cv_uploads, sop_uploads, resource_uploads, reviewed_uploads
+from app.models import User, Region, Post, Service, Resources, cv_uploads, sop_uploads, resource_uploads, reviewed_uploads, Subscription
 from sqlalchemy import or_
 from app import db
 import os
 from flask_mail import Message
 
-
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     form = SearchForm()
+    subscription_form = SubscriptionForm()
     regions = Region.query.all()
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -29,6 +29,17 @@ def home():
                 )
             ).all()
             return render_template('home.html', posts=posts, form=form, regions=regions)
+        elif subscription_form.validate_on_submit():
+            email = subscription_form.email.data
+            new_subscription = Subscription(email=email)
+            try:
+                db.session.add(new_subscription)
+                db.session.commit()
+                flash('You have successfully subscribed to updates!')
+            except Exception as e:
+                db.session.rollback()
+                flash('An error occurred while subscribing. Please try again later.')
+            return redirect(url_for('home'))
     else:
         posts = Post.query.all()
         return render_template('home.html', posts=posts, form=form, regions=regions)
@@ -369,9 +380,8 @@ def subscribe():
             db.session.add(new_subscription)
             db.session.commit()
 
-            send_confirmation_email(email)
 
-            flash('Subscription successful! Check your email for confirmation.', 'success')
+            flash('Subscription successful! Check your email for confirmation.')
 
         return redirect(url_for('home'))
 

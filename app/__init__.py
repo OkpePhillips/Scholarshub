@@ -22,3 +22,9 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)
 from app import routes, models
+from app.forms import SubscriptionForm
+
+@app.context_processor
+def inject_subscription_form():
+    subscription_form = SubscriptionForm()
+    return dict(subscription_form=subscription_form)
